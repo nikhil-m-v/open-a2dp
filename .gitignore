@@ -1,0 +1,23 @@
+# Local ChatGPT project mirror and synced reference material.
+/AGENTS.md
+/sources/
+/.agents/
+/.codex/
+/.aws/
+
+# Private investigation artifacts and local build outputs.
+/private/
+/artifacts/
+/local/
+/.vs/
+**/bin/
+**/obj/
+
+# Credentials, signing material, and potentially sensitive crash dumps.
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.key
+*.dmp
