@@ -59,6 +59,10 @@ Each connection has a generation identifier. Settings revision, operation correl
 
 Changing codec/format while streaming is an explicit stop, negotiate, and restart operation in v1. Show saved/requested and active settings separately throughout. If apply fails, report the actual stopped/faulted state; a future retry is explicit. User selection of SBC is allowed; automatic cross-codec fallback is deferred.
 
+Distinguish a Bluetooth link from A2DP readiness, endpoint availability and actual stream progress. Discovering a connected headset is not sufficient to label playback healthy. Expose the stalled stage and a safe next action for connected-but-silent reports (REF-002/003/007).
+
+Track/video stop-start and app handoff can create new streams without disconnecting the headphones (REF-011). Drain or discard only at valid frame boundaries, reset the stream's media clock/sequence bookkeeping according to protocol, clear partial PCM/codec frames, and fence callbacks by stream as well as connection generation. For unchanged negotiated formats, restart without unnecessary link reconnect. For a supported format change, perform the explicit stop/reconfigure path. Validate left/right mapping and account for shared/exclusive routing and endpoint DSP independently of codec selection (RQ-019/025).
+
 ## Audio timing, buffers, and backpressure
 
 The PCM contract is a research deliverable in M4-WP01. It must define formats, frame alignment, capacity, ownership transfers, read/write sequencing, cancellation, and lifetime. Do not expose arbitrary kernel pointers or accept caller-selected physical addresses. Do not claim a zero-copy/shared-memory mechanism before its safety and timing are measured.
@@ -81,6 +85,10 @@ Keep separate fields for OS/inbox observations, remote-advertised capabilities, 
 
 Apply only the intersection of actual remote support, tested implementation support, and the installed build's enabled codec set. Distribution review is a build/release decision; it is not an activation check or remotely revocable playback license.
 
+Display Windows PCM format, active A2DP/HFP profile, negotiated codec/transport format, selected microphone and transport owner as separate observations (RQ-026). A Windows 24-bit/96 kHz setting, no entry in a general decoder inventory, or a subjective listening impression does not establish the active Bluetooth codec. For a USB audio transmitter, show firmware-owned transport outside this driver path rather than offering an ineffective codec installation. Do not silently disable headset or standalone microphones to force A2DP; explain profile transitions using SRC-001 rather than conflicting community explanations.
+
+V1 quality selection is manual (RQ-023). A later opt-in adaptive mode must have measurable signals, a within-codec quality floor, downgrade/recovery hysteresis, user-visible reasons and recovery of the saved manual setting when disabled. Missing/stale telemetry cannot justify aggressive quality reduction. Gate it separately; REF-013 is a regression scenario, not proof of a particular algorithm bug.
+
 Preferences are per OS user and device. The privileged installation journal is machine-wide and separately protected. Settings corruption falls back to conservative defaults for editable preferences while displaying a warning; it never invents a valid active state or triggers a binding change. An unsupported newer settings version is not overwritten. Batch 2 specifies paths, schema/migrations, and atomic-write behavior.
 
 ## Lifecycle, coexistence, and recovery
@@ -97,6 +105,10 @@ Preferences are per OS user and device. The privileged installation journal is m
 | Install/update interruption | Recover using recorded prior binding and operation steps; validate current state rather than replaying unsafe changes. | M7/M8 recovery tests. |
 
 Automatic recovery means safe cleanup and bounded restart of an existing project stream, not automatic elevated driver rebinding. Restoring the inbox path is a distinct privileged operation with validated target identity. Recovery is not complete until playback works again on that path; a successful installer exit is insufficient.
+
+Persist intended owner and last observed binding separately from codec preferences. A mismatch after reboot/update/reconnect produces an ownership-drift diagnostic; no automatic privileged takeover (RQ-021). Independent recovery checks target endpoint enumeration/playback and non-target speakers/microphones immediately and after reboot. Installer progress/watchdog state and safe cancellation boundaries belong to the protected journal, not an optimistic UI timer (RQ-020/022).
+
+Record endpoint identity and routing/DSP attachments around bind/restore/update. Prefer stable identity where feasible; otherwise invalidate stale handles/preferences through an explicit mapping and guide app/EQ/APO reattachment. Do not rewrite other applications' configuration or infer channel corruption solely from a listening report (RQ-025).
 
 ## Measurements and release evidence
 

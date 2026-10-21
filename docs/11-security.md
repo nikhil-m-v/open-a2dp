@@ -82,6 +82,12 @@ Record pre-change binding/package identifiers and an appendable operation journa
 
 The independent helper reads validated protected state and checks live OS state before acting. Keep recovery instructions and artifacts available offline. Recovery tests include service/UI unavailable, reboot if actually required on the lab, and confirmation of inbox playback afterward. A system restore point or backup claim is not a substitute for a tested binding/recovery path.
 
+The Reddit intake adds specific recovery gates (REF-003/004/005/009/018). Inventory target and non-target endpoints and the intended driver owner before mutation; verify their actual playback/capture after restore and reboot. Do not modify boot-critical services or global audio/Bluetooth configuration to make a per-device installation work. Use no expiry, activation fingerprint, or background elevated rebind. On unexpected binding drift, explain the observed state and require a scoped explicit action; do not silently overwrite the user's choice.
+
+Journal each privileged stage with progress and operation identity. A watchdog detects a stalled operation and exposes diagnostics; it must not kill an in-flight PnP change or claim rollback succeeded while state is uncertain. Honor cancellation at tested safe boundaries, retain pending journal state, and use the independent recovery route. Define stage deadlines and restart behavior before implementing installation.
+
+For the critical boot-failure allegation, require a lab recovery rehearsal that does not depend on the installed OS/service starting. Record backup/image integrity, local console/recovery media access, and access to any required disk-encryption recovery material, stored privately outside logs/repository. Exercise supported interruption/reboot cases on the lab; do not attempt to reproduce alleged corruption on the primary PC. Treat the allegation as a risk trigger, not a proven driver root cause.
+
 Initial releases use a manually initiated verified package/update flow. Automatic updates are deferred. A signed but incompatible old build must not silently downgrade a newer driver/service; intentional rollback uses an explicitly compatible pair and revalidation. The package must never silently change boot/security settings.
 
 Validation: wrong target/package, denied elevation, altered staged files, truncated journal, process/power interruption, repeated operation, version mismatch, upgrade/rollback, and clean restoration.
@@ -105,6 +111,8 @@ Pin reviewed dependencies/tools by immutable revision and checksum where applica
 Signing keys and submission credentials stay outside the repository and untrusted builds. Separate unsigned CI validation from a controlled signing/release step. Validate current Microsoft submission policy and applicable certification tests before public distribution. Do not promise that a self-signed or merely Authenticode-signed package will load on all target systems. [Driver signing policy](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/kernel-mode-code-signing-policy--windows-vista-and-later-), [signing requirements](https://learn.microsoft.com/en-us/windows-hardware/drivers/dashboard/code-signing-reqs)
 
 Release qualification requires the selected supported Windows builds with Secure Boot and Memory Integrity enabled, standard-user playback, valid package integrity, tested recovery, complete notices, and no unresolved critical/high security findings. A development test-signing path is lab-only and never an end-user prerequisite.
+
+SRC-013 includes concerns about opaque software and unofficial patch suggestions, without evidence of malware. Our response is source/build transparency, controlled signing, least privilege and a documented maintenance/disclosure policy; nationality is not a security finding. Do not distribute or recommend patched proprietary binaries, broaden driver deletion, or disable security checks as a support shortcut.
 
 Validation: dependency/provenance audit, clean build, signing-key exposure checks, signature verification, applicable driver verification/HLK results, clean-target signed install, offline operation, and rollback evidence.
 

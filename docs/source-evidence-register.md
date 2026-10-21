@@ -10,7 +10,7 @@ Documentation links can change. Pin source commits and tool versions before runn
 
 ## Sources consulted
 
-| ID | Primary source | Finding used | Limits and follow-up |
+| ID | Source | Finding used | Limits and follow-up |
 | --- | --- | --- | --- |
 | SRC-001 | [Microsoft: Bluetooth Classic audio](https://learn.microsoft.com/en-us/windows-hardware/drivers/bluetooth/bluetooth-classic-audio) | Windows supports SBC and aptX Classic; AAC is available on Windows 11; aptX Adaptive depends on selected compatible systems. Classic A2DP is an output profile; microphone use involves HFP. | OS documentation, not this machine's inventory or a compatibility guarantee. Record exact OS/radio capabilities in M1/M2. |
 | SRC-002 | [Microsoft: Using the Bluetooth driver stack](https://learn.microsoft.com/en-us/windows-hardware/drivers/bluetooth/using-the-bluetooth-driver-stack) | Profile-driver selection uses PnP/INF matching. Kernel profile drivers use BRBs/IOCTLs for Bluetooth operations, including L2CAP. | Does not establish that our driver can safely coexist with or replace the relevant inbox binding. M3 must prove that. |
@@ -24,6 +24,7 @@ Documentation links can change. Pin source commits and tool versions before runn
 | SRC-010 | [REA license](https://raw.githubusercontent.com/morluto/rea/main/LICENSE) | MIT license for REA itself. | Does not license investigated products, providers, codecs, or copied output. Preserve notices if reused. |
 | SRC-011 | [REA Windows Ghidra support](https://raw.githubusercontent.com/morluto/rea/main/docs/windows-ghidra-p0.md) | Windows native analysis support has provider, version, and release boundaries. | Evaluate a pinned version against a known permitted fixture before using it for project conclusions. |
 | SRC-012 | [AOSP libldac license](https://android.googlesource.com/platform/external/libldac/+/refs/heads/main/LICENSE) | The referenced implementation carries Apache License 2.0. | Assess complete source provenance, build dependencies, notices, patents, trademarks, and redistribution for our planned use; no distribution clearance recorded. |
+| SRC-013 | [User-supplied Reddit discussion: Alternative A2DP Driver for PC](https://www.reddit.com/r/SonyHeadphones/comments/112zjf9/alternative_a2dp_driver_for_pc/) | Accessible comments reviewed 2026-10-21; classified as REF-001 through REF-023 with proposed prevention and regression coverage in the defect/risk register. Includes failures, success reports, questions and conflicting interpretations. | Anecdotal, mixed products/versions, mostly missing logs/builds; some second-hand/deleted accounts. Reader returned a cached page marked crawled six days earlier. Hidden/deleted comments and recommended external threads were not covered; individual comment permalinks and JSON retrieval failed, so use thread URL plus commenter/subject locators. Relative age labels are not exact timestamps. No complete inventory, current-version defect, causal attribution, malware finding or failure rate is established. |
 
 ## Decisions and rationale
 
@@ -44,7 +45,7 @@ These are project decisions, not conclusions guaranteed by the sources.
 
 | Item | State | Next action |
 | --- | --- | --- |
-| User's known defects and risks | Not supplied | Register each item with provenance and affected requirements when supplied. |
+| User-supplied Reddit risks/defects | Intake recorded under SRC-013 / REF-001 through REF-023 | Exact builds, logs, independent corroboration and local reproduction remain unavailable. Extend intake for additional supplied evidence. |
 | Exact reference-application build and runtime behavior | Unknown | Record only during an authorized behavior study; keep vendor claims separate. |
 | Primary PC OS/radio/headphone inventory | Not inspected | M1 read-only inventory; no capability claims in advance. |
 | Recoverable test machine and LDAC headset | Not arranged | M2 gate; do not substitute a VM without validated physical-radio access and recovery. |

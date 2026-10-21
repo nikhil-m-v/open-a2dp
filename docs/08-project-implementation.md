@@ -14,7 +14,7 @@ Only the primary PC is available. M0 and safe M1 work may proceed. Driver instal
 
 | Milestone | State | Exit condition |
 | --- | --- | --- |
-| M0 Documentation and reference behavior | In progress: batch 1 authored | Four batches reviewed, pending user defects explicitly tracked, reference claims distinguished from observations, requirements/tests linked. |
+| M0 Documentation and reference behavior | In progress: batch 1 authored; SRC-013 reference intake recorded | Four batches reviewed, reference reports and remaining evidence gaps tracked, reference claims distinguished from observations, requirements/tests linked. |
 | M1 Development foundation | Not started | Reproducible safe user-mode build, pinned inventory, specification/fixture baseline, read-only device inventory. |
 | M2 Recoverable hardware lab | Waiting for separate target | Exact hardware baseline and demonstrated offline recovery with deployment authorization. |
 | M3 Bluetooth transport proof | Blocked by M1/M2 evidence | Controlled-source SBC playback, target/channel ownership, disconnect cleanup, and inbox restoration demonstrated. |
@@ -32,11 +32,31 @@ Blocked dependencies here describe milestone prerequisites, not a request to mar
 | Package | Deliverable / bounded work | Acceptance and handoff |
 | --- | --- | --- |
 | M0-WP01 | Batch 1: PRD, roadmap, system design, security, index, evidence and defect/risk registers. | Links/IDs/status verified; no false runtime claims or synced-file changes. Next: M0-WP02. |
-| M0-WP02 | Batch 2: architecture, UI/UX, database/storage, and API/contracts. | Define authorized operations, version/error policy, target and session identity, requested/active model, preference migration, accessible recovery flow. Identify experimental data-path decisions without inventing a settled kernel ABI. Update index/checkpoint. |
+| M0-WP02 | Batch 2: architecture, UI/UX, database/storage, and API/contracts. | Define authorized operations, version/error policy, target and session identity, requested/active model, preference migration, accessible recovery flow; carry RQ-019 through RQ-026 into ownership, installation-progress, diagnostics and routing contracts. Identify experimental data-path decisions without inventing a settled kernel ABI. Update index/checkpoint. |
 | M0-WP03 | Batch 3: setup, feature implementation, integrations, development agents and workflows. | Describe safe build commands and version selection/pinning procedure, component task ownership, one-package session template, dependency reviews, and optional REA evaluation. No tool installation, forks, driver deployment, or agent launch merely to author these files. |
-| M0-WP04 | Batch 4: QA/testing, debugging/logging, and consistency review. | Every RQ and SEC has planned coverage; define evidence templates, log limits/retention, hardware matrix, performance-baseline protocol, failure injection, and release gates. Record missing defect input explicitly. |
+| M0-WP04 | Batch 4: QA/testing, debugging/logging, and consistency review. | Every RQ, SEC and REF has planned coverage; expand the regression intake below into executable procedures and evidence templates, log limits/retention, hardware matrix, performance-baseline protocol, failure injection, and release gates. Preserve unresolved reference-version/reproduction gaps. |
 
-When the user's defects arrive, intake them as the first step of the active documentation package and update affected documents. Do not wait indefinitely for them or call them verified. If no local reference-app observation exists by M0 close, state that plainly and carry behavior study as an optional evidence task rather than claiming it happened.
+The user-supplied Reddit thread has been reviewed under **M0-INTAKE01**, a bounded reference-intake update, not documentation batch 2 or an implementation milestone. REF-001 through REF-023 are mapped below and in the risk register. Later sources extend this intake. If no local reference-app observation exists by M0 close, state that plainly and carry behavior study as an optional evidence task rather than claiming it happened.
+
+## Reddit regression intake and package ownership
+
+All scenarios are planned and unexecuted. Extend the scheduled QA/logging documents in M0-WP04; do not invent runtime pass results. Milestone owners must carry these acceptance additions into their packages before implementation.
+
+| Reference reports | Prevention / acceptance addition | First responsible package and test |
+| --- | --- | --- |
+| REF-001/002/003 | Distinguish link/endpoint/stream readiness; resume without mandatory reboot; restore target endpoint and actual inbox audio across restart. | M3-WP01, M4-WP02/03; TC-003, TC-006, TC-007, TC-009, TC-011. |
+| REF-004/006/023 | Preserve non-target speakers/inputs and separate-mic mute state; compare immediate and post-reboot playback/capture. Preserve ambiguous reference-product attribution. | M3-WP01, M4-WP03, M7-WP03; TC-020. |
+| REF-005 | Recovery possible with OS/service unavailable; validate backup/recovery material privately; test supported interruption/reboot cases on lab only. No root-cause assertion from the report. | M2-WP01, M3-WP01, M7-WP03; TC-007, TC-011, TC-016. |
+| REF-007/008 | Profile/capability/input explanations; no implicit mic disabling or unsupported LDAC promise. Test headset and standalone input separately. | M3-WP02, M4-WP03, M6-WP01; TC-002, TC-005, TC-009, TC-026. |
+| REF-009 | Persistent operation stage, stalled-operation detection and safe cancellation/recovery; no blind helper/PnP kill. | M3-WP01, M6-WP03, M7-WP03; TC-022. |
+| REF-010/011/012 | Matched baseline and artifact tests; at least 50 stream boundaries and 20 supported format alternations; no manual reconnect or stale-channel mapping. Future LL codec tests remain in its own M9 track. | M4-WP02, M7-WP02; TC-004, TC-013, TC-019. |
+| REF-013 | Manual quality default; later adaptation needs opt-in, quality floor, observable cause, hysteresis and measured recovery/disable behavior. | M5-WP03, optional M7-WP02A; TC-023. |
+| REF-014/021 | Known left/right fixtures, OS-update checks, stable endpoint identity where feasible; disclose routing/EQ/APO reattachment requirements. | M4-WP01/03, M7-WP01; TC-010, TC-019, TC-025. |
+| REF-015/016/017 | Explain PCM versus active profile/codec/owner and supported sample-rate ceiling; instrument A/V timing; no guaranteed audible improvement or false decoder-list inference. | M3-WP02, M5-WP02, M6-WP01; TC-001, TC-005, TC-013, TC-026. |
+| REF-018/019 | Honor explicit binding choice across UI/service/OS restart, reconnect and update; no expiry, activation or hardware fingerprint gate; diagnose ownership drift. | M3-WP01, M6-WP02/03, M7-WP03; TC-014, TC-021. |
+| REF-020/022 | Offline setup/recovery, issue/disclosure routes, maintenance policy, provenance and least privilege; no reliance on personal support or nationality-based trust claims. | M6-WP03, M8-WP03; TC-008, TC-017, TC-018, TC-024. |
+
+Release gates now explicitly include non-target endpoint preservation and verified intended binding ownership. Any project reproduction of critical boot/recovery failure blocks affected release qualification. A reference anecdote alone is not counted as an open confirmed project bug or proof a proposed mitigation works.
 
 ## M1 — Safe development foundation
 
@@ -145,6 +165,8 @@ Next bounded package:
 
 ## Session checkpoint — M0-WP01
 
+Historical snapshot at batch 1 close; the subsequent reference intake is recorded below.
+
 - Objective: implement documentation batch 1 and supporting navigation/evidence/risk records.
 - Prerequisites: user-approved plan; empty local reference directory; root instructions read.
 - Exclusions: remaining documentation batches, runtime code, installation, tool setup, REA fork/use, device probing, hardware tests, publishing, and security/boot changes.
@@ -155,3 +177,16 @@ Next bounded package:
 - Risks: user's defect list is pending; target hardware and all driver/codec feasibility remain unverified.
 - Recovery: no system settings changed; documentation is additive under `docs/`.
 - Next: **M0-WP02**, documentation batch 2. Intake user defects first if available; otherwise proceed with their absence recorded.
+
+## Session checkpoint — M0-INTAKE01
+
+- Objective: review the user-supplied Reddit thread and translate reported problems/caveats into requirements, risks, security/design constraints and owned regression scenarios.
+- Prerequisites: documentation batch 1 and clean Git baseline; source URL supplied by the user.
+- Exclusions: remaining documentation batches, local reference-binary investigation, runtime implementation, experimental driver deployment and reproduction of user incidents.
+- Delivered: 23 categorized reference reports, 8 additional prospective risks, RQ-019 through RQ-026 and matching TC scenarios, amendments to existing tests, SRC-013, and this package-ownership matrix. Updated index, system design and security requirements.
+- Evidence: accessible cached thread comments with commenter/subject locators; unavailable/deleted comments not reconstructed; exact builds and causes unverified. Contradictory successes, expected profile behavior, subjective quality impressions and ambiguous product attribution are retained as limitations.
+- Validation: passed local Markdown link resolution, balanced code fences, diff/whitespace checks and unique-definition/reference checks (26 requirements, 26 planned scenarios, 23 reference reports, 23 risks, 13 sources, 9 security controls, 8 decisions and 7 research questions). All 23 reports have risk/requirement/test links and roadmap ownership. Root instructions and synced reference inventory are unchanged. No runtime tests executed.
+- Status: **M0-INTAKE01 complete**; documentation batches 2 through 4 remain pending.
+- Risks: future mitigations are unimplemented; standalone test hardware and all driver/codec feasibility remain unverified.
+- Recovery: documentation-only change; no system configuration altered.
+- Next: **M0-WP02**, carrying the recorded mitigations into the four batch 2 documents.

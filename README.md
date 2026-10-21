@@ -17,6 +17,8 @@ Start with the [documentation index](docs/README.md).
 
 The next bounded task is **M0-WP02**: architecture, UI/UX, local storage, and API contracts. The roadmap splits the remaining work into achievable sessions.
 
+The [defect/risk register](docs/defect-risk-register.md) includes the user-supplied Reddit discussion: 23 externally reported problems, expectations and integration caveats mapped to planned prevention and regression tests. These are unverified reference reports, not confirmed defects in this project.
+
 ## Development direction
 
 The proposed stack is C++/WDK for native components and C#/.NET/WPF for the local desktop interface. User-mode encoding, narrow local IPC, bounded data paths, and independent recovery are design requirements. Playback requires no cloud service or runtime AI agents.

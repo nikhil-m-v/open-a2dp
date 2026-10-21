@@ -6,6 +6,8 @@ Documentation baseline: 2026-10-21 (Asia/Calcutta). Working project name; no pro
 
 Batch 1 of 4 is authored: requirements, implementation milestones, system design, security, and the supporting registers. These documents specify future behavior. No application, driver, codec integration, installer, hardware experiment, or binary reverse engineering has been implemented or tested.
 
+The user-supplied Reddit thread has been reviewed: 23 reference reports/caveats are classified in the defect/risk register and mapped to prevention, requirements and planned regressions. They remain externally reported, not confirmed project defects.
+
 Confirmed direction: Windows 11 x64 desktop application; SBC transport proof followed by LDAC; behavior-first investigation; one active A2DP output; offline operation. Only the user's primary PC is currently available. Experimental driver deployment waits for a separate recoverable lab.
 
 ## Read first
@@ -43,7 +45,7 @@ The two agent documents cover development roles and session workflows. They do n
 
 ## How to continue
 
-The next work package is **M0-WP02: documentation batch 2**. Incorporate the user's reference-application defects first if supplied; their absence does not block documentation. Do not start all remaining milestones in the same prompt.
+The next work package is **M0-WP02: documentation batch 2**. Carry the recorded REF-001 through REF-023 mitigations into architecture, UI/UX, storage and API contracts. Incorporate any additional evidence without treating anecdotes as reproduced failures. Do not start all remaining milestones in the same prompt.
 
 Each session selects one package from the roadmap, records its evidence and validation, and updates the checkpoint there. Later findings update these files in place with the reason and affected requirements. Unresolved driver feasibility must not silently become an implementation claim.
 
