@@ -1,6 +1,6 @@
 # Source and evidence register
 
-Last reviewed: 2026-10-21 (Asia/Calcutta). This is a documentation research log, not a record of local reverse engineering.
+Last updated: 2026-10-30 (Asia/Calcutta). SRC-014 through SRC-016 were checked for batch 2; earlier entries retain their original review limits. This is a documentation research log, not a record of local reverse engineering.
 
 ## Evidence rules
 
@@ -25,6 +25,14 @@ Documentation links can change. Pin source commits and tool versions before runn
 | SRC-011 | [REA Windows Ghidra support](https://raw.githubusercontent.com/morluto/rea/main/docs/windows-ghidra-p0.md) | Windows native analysis support has provider, version, and release boundaries. | Evaluate a pinned version against a known permitted fixture before using it for project conclusions. |
 | SRC-012 | [AOSP libldac license](https://android.googlesource.com/platform/external/libldac/+/refs/heads/main/LICENSE) | The referenced implementation carries Apache License 2.0. | Assess complete source provenance, build dependencies, notices, patents, trademarks, and redistribution for our planned use; no distribution clearance recorded. |
 | SRC-013 | [User-supplied Reddit discussion: Alternative A2DP Driver for PC](https://www.reddit.com/r/SonyHeadphones/comments/112zjf9/alternative_a2dp_driver_for_pc/) | Accessible comments reviewed 2026-10-21; classified as REF-001 through REF-023 with proposed prevention and regression coverage in the defect/risk register. Includes failures, success reports, questions and conflicting interpretations. | Anecdotal, mixed products/versions, mostly missing logs/builds; some second-hand/deleted accounts. Reader returned a cached page marked crawled six days earlier. Hidden/deleted comments and recommended external threads were not covered; individual comment permalinks and JSON retrieval failed, so use thread URL plus commenter/subject locators. Relative age labels are not exact timestamps. No complete inventory, current-version defect, causal attribution, malware finding or failure rate is established. |
+
+Additional batch 2 sources, reviewed 2026-10-30:
+
+| ID | Source | Finding used | Limits and follow-up |
+| --- | --- | --- | --- |
+| SRC-014 | [Microsoft: Named pipe security and access rights](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipe-security-and-access-rights) | Pipe access uses security descriptors; generic write includes pipe-instance creation rights. Supports explicit rights and session-specific authorization design. | No ACL or IPC implementation tested. M1/M6/M7 must verify the chosen service/session policy and denial cases. |
+| SRC-015 | [Microsoft: Impersonating a named pipe client](https://learn.microsoft.com/en-us/windows/win32/ipc/impersonating-a-named-pipe-client) | A server can use a connected client's token and revert to its own identity afterward. | API capability does not prove correct authentication, failure handling, or least privilege in this project. |
+| SRC-016 | [Microsoft: GetNamedPipeServerProcessId](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getnamedpipeserverprocessid) | Windows exposes the server process identifier for a named pipe. | A PID alone is not server authentication. A race-safe service association and hostile-server tests remain required before IPC implementation. |
 
 ## Decisions and rationale
 

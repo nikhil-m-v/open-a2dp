@@ -1,10 +1,10 @@
 # Open-source Windows A2DP codec project
 
-Documentation baseline: 2026-10-21 (Asia/Calcutta). Working project name; no product affiliation is implied.
+Documentation baseline: 2026-10-21; batch 2 reviewed 2026-10-30 (Asia/Calcutta). Working project name; no product affiliation is implied.
 
 ## Current state
 
-Batch 1 of 4 is authored: requirements, implementation milestones, system design, security, and the supporting registers. These documents specify future behavior. No application, driver, codec integration, installer, hardware experiment, or binary reverse engineering has been implemented or tested.
+Batches 1 and 2 of 4 are authored and reviewed: requirements, implementation milestones, system design, security, supporting registers, UI/UX, architecture, local storage and API contracts. M0 remains in progress. These documents specify future behavior. No application, driver, codec integration, installer, hardware experiment, or binary reverse engineering has been implemented or tested.
 
 The user-supplied Reddit thread has been reviewed: 23 reference reports/caveats are classified in the defect/risk register and mapped to prevention, requirements and planned regressions. They remain externally reported, not confirmed project defects.
 
@@ -28,10 +28,10 @@ Pending filenames below are plain text deliberately: the files do not exist yet.
 | 1 | [08-project-implementation.md](08-project-implementation.md) | Authored |
 | 1 | [11-security.md](11-security.md) | Authored |
 | 1 | [15-system-design.md](15-system-design.md) | Authored |
-| 2 | `02-ui-ux-design.md` | Pending |
-| 2 | `03-architecture.md` | Pending |
-| 2 | `04-database-and-storage.md` | Pending |
-| 2 | `05-api-and-contracts.md` | Pending |
+| 2 | [02-ui-ux-design.md](02-ui-ux-design.md) | Authored and reviewed |
+| 2 | [03-architecture.md](03-architecture.md) | Authored and reviewed |
+| 2 | [04-database-and-storage.md](04-database-and-storage.md) | Authored and reviewed |
+| 2 | [05-api-and-contracts.md](05-api-and-contracts.md) | Authored and reviewed |
 | 3 | `06-development-agents.md` | Pending |
 | 3 | `07-agent-workflows.md` | Pending |
 | 3 | `09-setup-and-initialization.md` | Pending |
@@ -45,7 +45,7 @@ The two agent documents cover development roles and session workflows. They do n
 
 ## How to continue
 
-The next work package is **M0-WP02: documentation batch 2**. Carry the recorded REF-001 through REF-023 mitigations into architecture, UI/UX, storage and API contracts. Incorporate any additional evidence without treating anecdotes as reproduced failures. Do not start all remaining milestones in the same prompt.
+The next work package is **M0-WP03: documentation batch 3**. Specify setup, feature implementation, integrations, development roles and session workflows using the batch 2 boundaries. Carry the recorded REF-001 through REF-023 mitigations into package handoffs. Incorporate any additional evidence without treating anecdotes as reproduced failures. Do not start all remaining milestones in the same prompt.
 
 Each session selects one package from the roadmap, records its evidence and validation, and updates the checkpoint there. Later findings update these files in place with the reason and affected requirements. Unresolved driver feasibility must not silently become an implementation claim.
 
@@ -54,7 +54,7 @@ Each session selects one package from the roadmap, records its evidence and vali
 - The user-approved direction and root project instructions govern this work. `sources/` and existing synced files remain read-only.
 - `RQ-*` identifies requirements; `TC-*` identifies planned acceptance scenarios; `SEC-*` identifies security controls; `RISK-*` identifies prospective risks; `SRC-*` identifies sources; `DEC-*` identifies decisions; `Q-*` identifies unresolved research questions.
 - **Documented externally** means a source states a behavior. **Observed locally** requires a recorded run. **Proposed** means a design choice. **Verified** requires a linked result for a specific build and environment.
-- Requirements and tests below are planned. Authoring or reviewing a document does not pass a runtime test.
+- Requirements and tests are planned. Authoring or reviewing a document does not pass a runtime test. Batch 2 includes illustrative semantic payloads, not executable schemas or a frozen driver ABI.
 - The PRD owns product scope, system design owns lifecycle invariants, security owns trust-boundary requirements, and the roadmap owns task status. API layouts, numeric limits, dependency versions, and executable contracts are finalized in their scheduled packages.
 
 ## Distribution intent

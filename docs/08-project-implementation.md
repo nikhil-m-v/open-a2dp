@@ -14,7 +14,7 @@ Only the primary PC is available. M0 and safe M1 work may proceed. Driver instal
 
 | Milestone | State | Exit condition |
 | --- | --- | --- |
-| M0 Documentation and reference behavior | In progress: batch 1 authored; SRC-013 reference intake recorded | Four batches reviewed, reference reports and remaining evidence gaps tracked, reference claims distinguished from observations, requirements/tests linked. |
+| M0 Documentation and reference behavior | In progress: batches 1 and 2 complete; SRC-013 reference intake recorded | Four batches reviewed, reference reports and remaining evidence gaps tracked, reference claims distinguished from observations, requirements/tests linked. |
 | M1 Development foundation | Not started | Reproducible safe user-mode build, pinned inventory, specification/fixture baseline, read-only device inventory. |
 | M2 Recoverable hardware lab | Waiting for separate target | Exact hardware baseline and demonstrated offline recovery with deployment authorization. |
 | M3 Bluetooth transport proof | Blocked by M1/M2 evidence | Controlled-source SBC playback, target/channel ownership, disconnect cleanup, and inbox restoration demonstrated. |
@@ -190,3 +190,17 @@ Historical snapshot at batch 1 close; the subsequent reference intake is recorde
 - Risks: future mitigations are unimplemented; standalone test hardware and all driver/codec feasibility remain unverified.
 - Recovery: documentation-only change; no system configuration altered.
 - Next: **M0-WP02**, carrying the recorded mitigations into the four batch 2 documents.
+
+## Session checkpoint — M0-WP02 — 2026-10-30
+
+- Objective: complete the next package in the first milestone, M0, and prepare the reviewed changes for the existing Git remote.
+- Prerequisites: clean local `main` at `8f5fc77407468632e439b69165ab5594ae28d27f`; remote `main` verified at the same commit before editing; batch 1 and the reference intake available; root instructions read. The two earlier documentation commits already existed, so this is the first commit of this work session, not a repository initialization.
+- Exclusions: batches 3/4, application or protocol implementation, dependency/tool installation, REA execution/forking, device probing, driver deployment, hardware tests, and system/boot/security changes.
+- Delivered: [UI/UX](02-ui-ux-design.md), [architecture](03-architecture.md), [storage](04-database-and-storage.md), and [API/contracts](05-api-and-contracts.md). Updated root/index navigation and current status; recorded SRC-014 through SRC-016 for the narrow Windows IPC observations used by the proposed design.
+- Contract decisions: authenticated OS-session ownership with one target; separate service/connection/stream identities; saved/requested/applied/active distinctions; explicit stop/configure/restart; UI-owned versioned preferences; independent protected helper journal; typed errors and compatible-version negotiation; safe cancellation and honest recovery verification. Numeric budgets, executable schemas and kernel/media ABI remain assigned to their implementation gates.
+- Review: cross-document review corrected preference authority (the service knows only a captured submitted request, not later local Saves) and bounded retry semantics (retained in-flight operations, monotonic snapshot preconditions and explicit handling of expired results). All 23 reference reports have batch 2 architecture/UI/API handoffs; storage maps its relevant 19. Each of the four documents carries RQ-019 through RQ-026.
+- Validation: local Markdown link resolution, balanced fences, illustrative JSON parsing, whitespace checks, and unique-definition/reference checks passed across 12 Markdown files. Identifier inventory: 26 requirements, 26 planned scenarios, 23 reference reports, 23 risks, 16 sources, 9 security controls, 8 decisions and 7 research questions. The initial requirement-coverage check did not expand compact IDs such as `RQ-020/021`; the corrected check passed. Root instruction SHA-256 and the empty synced reference inventory remain unchanged. No runtime, accessibility, IPC, storage-durability or hardware tests executed; document validation does not satisfy those scenarios.
+- Status: **M0-WP02 complete**. M0 remains in progress; batches 3 and 4 and their consistency review remain pending. M1 has not started.
+- Risks: target binding, media exchange, actual codec support, independent hardware verification, test-machine availability and distribution eligibility remain unresolved. These specifications do not demonstrate working audio or recovery.
+- Recovery: documentation-only change; no system configuration altered and no synced reference edited. Git preserves the prior documentation revision.
+- Next: **M0-WP03**, author setup/initialization, feature implementation, integrations, development roles and workflows using these boundaries. Do not install tools or deploy drivers merely to write that package; retain M0-WP04 for QA/logging procedures and final cross-document coverage.
