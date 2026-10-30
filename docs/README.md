@@ -1,10 +1,10 @@
 # Open-source Windows A2DP codec project
 
-Documentation baseline: 2026-10-21; batch 2 reviewed 2026-10-30 (Asia/Calcutta). Working project name; no product affiliation is implied.
+Documentation baseline: 2026-10-21; batches 2 and 3 reviewed 2026-10-30 (Asia/Calcutta). Working project name; no product affiliation is implied.
 
 ## Current state
 
-Batches 1 and 2 of 4 are authored and reviewed: requirements, implementation milestones, system design, security, supporting registers, UI/UX, architecture, local storage and API contracts. M0 remains in progress. These documents specify future behavior. No application, driver, codec integration, installer, hardware experiment, or binary reverse engineering has been implemented or tested.
+Batches 1 through 3 of 4 are authored and reviewed: requirements, milestones, system design, security, supporting registers, UI/UX, architecture, storage, contracts, setup, feature implementation, integrations and contributor workflows. M0 remains in progress. These documents specify future behavior; setup commands are conditional procedures for later packages. No application, driver, codec integration, installer, hardware experiment, or binary reverse engineering has been implemented or tested.
 
 The user-supplied Reddit thread has been reviewed: 23 reference reports/caveats are classified in the defect/risk register and mapped to prevention, requirements and planned regressions. They remain externally reported, not confirmed project defects.
 
@@ -32,11 +32,11 @@ Pending filenames below are plain text deliberately: the files do not exist yet.
 | 2 | [03-architecture.md](03-architecture.md) | Authored and reviewed |
 | 2 | [04-database-and-storage.md](04-database-and-storage.md) | Authored and reviewed |
 | 2 | [05-api-and-contracts.md](05-api-and-contracts.md) | Authored and reviewed |
-| 3 | `06-development-agents.md` | Pending |
-| 3 | `07-agent-workflows.md` | Pending |
-| 3 | `09-setup-and-initialization.md` | Pending |
-| 3 | `10-feature-implementation.md` | Pending |
-| 3 | `12-integrations.md` | Pending |
+| 3 | [06-development-agents.md](06-development-agents.md) | Authored and reviewed |
+| 3 | [07-agent-workflows.md](07-agent-workflows.md) | Authored and reviewed |
+| 3 | [09-setup-and-initialization.md](09-setup-and-initialization.md) | Authored and reviewed |
+| 3 | [10-feature-implementation.md](10-feature-implementation.md) | Authored and reviewed |
+| 3 | [12-integrations.md](12-integrations.md) | Authored and reviewed |
 | 4 | `13-qa-and-testing.md` | Pending |
 | 4 | `14-debugging-and-logging.md` | Pending |
 | 4 | Cross-document consistency and requirement/test review | Pending |
@@ -45,7 +45,7 @@ The two agent documents cover development roles and session workflows. They do n
 
 ## How to continue
 
-The next work package is **M0-WP03: documentation batch 3**. Specify setup, feature implementation, integrations, development roles and session workflows using the batch 2 boundaries. Carry the recorded REF-001 through REF-023 mitigations into package handoffs. Incorporate any additional evidence without treating anecdotes as reproduced failures. Do not start all remaining milestones in the same prompt.
+The next work package is **M0-WP04: documentation batch 4**. Expand planned scenarios into QA/evidence procedures, define bounded diagnostics/logging policy, and review consistency and coverage across every RQ, SEC and REF. Preserve the distinction between fixtures and hardware evidence, and retain unavailable reference-version/reproduction details. M0 closure must explicitly record that no local reference-app observation has occurred. Do not start M1 until the documentation baseline closes.
 
 Each session selects one package from the roadmap, records its evidence and validation, and updates the checkpoint there. Later findings update these files in place with the reason and affected requirements. Unresolved driver feasibility must not silently become an implementation claim.
 

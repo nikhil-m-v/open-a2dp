@@ -1,6 +1,6 @@
 # Source and evidence register
 
-Last updated: 2026-10-30 (Asia/Calcutta). SRC-014 through SRC-016 were checked for batch 2; earlier entries retain their original review limits. This is a documentation research log, not a record of local reverse engineering.
+Last updated: 2026-10-30 (Asia/Calcutta). SRC-014 through SRC-016 were checked for batch 2 and SRC-017 through SRC-026 for batch 3; earlier entries retain their original review limits. This is a documentation research log, not a record of local reverse engineering.
 
 ## Evidence rules
 
@@ -33,6 +33,21 @@ Additional batch 2 sources, reviewed 2026-10-30:
 | SRC-014 | [Microsoft: Named pipe security and access rights](https://learn.microsoft.com/en-us/windows/win32/ipc/named-pipe-security-and-access-rights) | Pipe access uses security descriptors; generic write includes pipe-instance creation rights. Supports explicit rights and session-specific authorization design. | No ACL or IPC implementation tested. M1/M6/M7 must verify the chosen service/session policy and denial cases. |
 | SRC-015 | [Microsoft: Impersonating a named pipe client](https://learn.microsoft.com/en-us/windows/win32/ipc/impersonating-a-named-pipe-client) | A server can use a connected client's token and revert to its own identity afterward. | API capability does not prove correct authentication, failure handling, or least privilege in this project. |
 | SRC-016 | [Microsoft: GetNamedPipeServerProcessId](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-getnamedpipeserverprocessid) | Windows exposes the server process identifier for a named pipe. | A PID alone is not server authentication. A race-safe service association and hostile-server tests remain required before IPC implementation. |
+
+Additional batch 3 sources, reviewed 2026-10-30 for future setup procedures:
+
+| ID | Source | Finding used | Limits and follow-up |
+| --- | --- | --- | --- |
+| SRC-017 | [Microsoft: .NET CLI](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet) | SDK/runtime inventory and effective SDK commands; host architecture affects inventory. | No local inventory executed. M1 records the actual installed tools and selected environment. |
+| SRC-018 | [Microsoft: vswhere examples](https://github.com/microsoft/vswhere/wiki/Examples) | Installed Visual Studio instances can be queried and filtered by component. | No discovery utility downloaded/run. Missing PATH entries or kit directories do not prove component availability. |
+| SRC-019 | [Microsoft: WDK download/setup](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) | Setup documents compatible Visual Studio versions and matching SDK/WDK build requirements. | No toolchain selected or installed; recheck the supported combination against actual M1 inventory. This is not a driver-deployment or signing result. |
+| SRC-020 | [Microsoft: global.json](https://learn.microsoft.com/en-us/dotnet/core/tools/global-json) | Exact SDK selection can use an explicit version, disabled roll-forward and prerelease policy. | No global.json created; M1 selects compatible versions and records their provenance. |
+| SRC-021 | [Microsoft: Desktop SDK project properties](https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props-desktop) | WPF requires appropriate Windows target/framework configuration and UseWPF. | No WPF project or targeting assets validated; M6 UI implementation remains pending. |
+| SRC-022 | [Microsoft: NuGet dependency locking](https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#locking-dependencies) | Lock files and locked restore constrain resolution; a library lock does not dictate the consuming application's dependency closure. | No dependencies/locks selected; native and transitive inputs need their own review. |
+| SRC-023 | [Microsoft: dotnet restore](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore) | Restore source/configuration, package location and locked-mode options support explicit acquisition/validation procedures. | Locked mode is not network isolation. Complete verified local assets and no-network execution must be demonstrated later. |
+| SRC-024 | [Microsoft: dotnet build](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build) | Build can restore implicitly; no-restore suppresses that step. CLI/workload and imported-task behavior must be considered separately. | No project built; flags alone do not prove offline operation or absence of project side effects. |
+| SRC-025 | [Microsoft: dotnet test](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test) | Test invocation/options depend on the selected runner; reuse of built binaries needs matching configuration. | Template is conditional on a compatible VSTest setup. No runner selected or tests executed. |
+| SRC-026 | [Microsoft: MSBuild command reference](https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference) | Explicit project, target and property arguments support a scoped future native user-mode build. | Review imported targets and pin tools before running; no native/driver project exists or was built. |
 
 ## Decisions and rationale
 
